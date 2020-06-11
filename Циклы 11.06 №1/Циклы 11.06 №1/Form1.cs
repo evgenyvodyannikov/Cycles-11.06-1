@@ -21,18 +21,19 @@ namespace Циклы_11._06__1
 		{
             double.TryParse(textBox1.Text, out double x);
             double.TryParse(textBox2.Text, out double E);
-            double s = Math.Sin(x);
-            double right = 0, u = 1, dife;
-            int n = 1;
-            do
+            double right = 1, u = 1, dife;
+            int n = 0;
+            while (E <= Math.Abs(Math.Sin(x) - right))
             {
+                if (n != 1)
+                {
+                    right *= u;
+                    u = 1 - x * x / Math.Pow(n - 1, 2) * Math.PI * Math.PI;
+                }
                 n++;
-                right += u;
-                u *= 1 - x * x / Math.Pow(n - 1, 2) * Math.PI * Math.PI;
-                dife = s - right;
             }
-            while (Math.Abs(dife) > E);
-            MessageBox.Show("" + s + "  " + right + " " + n);
+            
+            MessageBox.Show("" + Math.Sin(x).ToString("f4") + "  " + right.ToString("f4") + " " + n);
         }
 	}
 }
